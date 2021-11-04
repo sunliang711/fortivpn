@@ -1,20 +1,28 @@
 #!/bin/bash
-source credential
-twoFa=$(cat 2fa | tr -d '\n')
-echo "2fa code: $twoFa"
 
 if [ $EUID -ne 0 ];then
     echo "need run as root"
     exit 1
 fi
 
-if ! command -v openfortivpn >/dev/null 2>&1;then
-    apt-get install openfortivpn -y || { echo "install openfortivpn failed!"; exit 2; }
-fi
+function install(){
+    cmd=${1:?'install: missing cmd name'}
 
-if ! command -v expect >/dev/null 2>&1;then
-    apt-get install expect -y || { echo "install expect failed!"; exit 3; }
-fi
+    if ! command -v ${cmd} >/dev/null 2>&1;then
+        apt-get update
+        apt-get install ${cmd} -y || { echo "install ${cmd} failed!"; exit 3; }
+    fi
+}
+
+
+install openfortivpn
+install expect
+install tmux
+
+
+source credential || { echo "load credential failed!"; exit 2; }
+twoFa=$(cat 2fa | tr -d '\n')
+echo "2fa code: $twoFa"
 
 vpnScript=/tmp/vpn.expect
 configFile=config
