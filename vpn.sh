@@ -21,7 +21,13 @@ install tmux
 
 
 source credential || { echo "load credential failed!"; exit 2; }
-twoFa=$(cat 2fa | tr -d '\n')
+
+if [ -n $1 ];then
+    twoFa=$1
+else
+    twoFa=$(cat 2fa | tr -d '\n')
+fi
+
 echo "2fa code: $twoFa"
 
 vpnScript=/tmp/vpn.expect
