@@ -1,0 +1,6 @@
+.DS_Store
+*.swp
+.idea/
+2fa
+credential
+config
