@@ -1,5 +1,4 @@
 #!/bin/bash
-# openfortivpn $host:$port -u $user -p $password --trusted-cert $cert
 vpnScript=/tmp/vpn.expect
 cat<<EOF>${vpnScript}
 #!/usr/bin/expect -f
