@@ -18,6 +18,7 @@ function install(){
 install openfortivpn
 install expect
 install tmux
+install sudo
 
 
 source credential || { echo "load credential failed!"; exit 2; }
