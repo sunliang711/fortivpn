@@ -1,0 +1,1 @@
+docker run -e host=<IP> -e port=8443 -e cert=bf51699b56ccbc9f3cb47774a1050a289aef748bdf9742ba1812cf1d9190739d -e user='<USER>'  -e password='<PASSWORD>' -e twoFa=766294 --privileged  -d vpn bash
